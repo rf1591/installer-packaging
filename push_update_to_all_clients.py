@@ -15,67 +15,67 @@ import subprocess
 import datetime
 import calendar
 
-TRUNK_DIR = '/home/cib/custominstallerbuilder/DEPENDENCIES'
-PUBLIC_KEY_FILE = '/path/to/softwareupdater.publickey'
-PRIVATE_KEY_FILE = '/path/to/softwareupdater.privatekey'
+trunk_dir = '/home/cib/custominstallerbuilder/DEPENDENCIES'
+public_key_file = '/root/xuefeng.publickey'
+private_key_file = '/root/xuefeng.privatekey'
 
-UPDATE_URL = 'http://blackbox.poly.edu/updatesite/'
+update_url = 'http://blackbox.poly.edu/updatesite/'
 
-UPDATESITE_DIR = '/var/www/updatesite'
-DEBUG_UPDATESITE_DIR = UPDATESITE_DIR+ '-test'
+updatesite_dir = '/var/www/updatesite'
+debug_updatesite_dir = updatesite_dir+ '-test'
 
 # Sanity check to make sure the key embedded in softwareupdater.py is the same
 # key we're signing with. The only time this would not be the case is if the
 # update key is being changed.
-publickeyfile = open(PUBLIC_KEY_FILE, 'r')
+publickeyfile = open(public_key_file, 'r')
 content = publickeyfile.readline()
 e = content.partition(" ")[0]
 n = content.partition(" ")[2]
 
-UPDATE_PUBKEY_STRING = "{'e':" + e + ", 'n':" + n + "}"
+update_pubkey_string = "{'e':" + e + ", 'n':" + n + "}"
 
 found = False
-for line in open(TRUNK_DIR + "/softwareupdater/softwareupdater.py"):
-    if UPDATE_PUBKEY_STRING in line:
+for line in open(trunk_dir + "/softwareupdater/softwareupdater.py"):
+    if update_pubkey_string in line:
         found = True
 if found == False:
-    print "Did not find the correct update key in " + TRUNK_DIR + "/softwareupdater/softwareupdater.py"
+    print "Did not find the correct update key in " + trunk_dir + "/softwareupdater/softwareupdater.py"
     sys.exit(1)
 
 found = False
-for line in open(TRUNK_DIR + "/softwareupdater/softwareupdater.py"):
-    if "softwareurl = \"" + UPDATE_URL + "\"" in line:
+for line in open(trunk_dir + "/softwareupdater/softwareupdater.py"):
+    if "softwareurl = \"" + update_url + "\"" in line:
         found = True
 if found == False:
-    print "Did not find the correct update url in " + TRUNK_DIR + "/softwareupdater/softwareupdater.py"
+    print "Did not find the correct update url in " + trunk_dir + "/softwareupdater/softwareupdater.py"
     sys.exit(1)
 
 if len(sys.argv) > 1:
     # Note that the -d option in update_software.py isn't a really convincing idea if you can
     # just pass a different directory.
-    UPDATESITE_DIR = DEBUG_UPDATESITE_DIR
-    print "An argument was provided. Using debug mode (so, putting files in " + UPDATESITE_DIR + ")."
+    updatesite_dir = debug_updatesite_dir
+    print "An argument was provided. Using debug mode (so, putting files in " + updatesite_dir + ")."
 
 # The update_software.py script does weird things if the directory doesn't already exist,
 # such as creating a file with the name of the directory.
-if not os.path.exists(UPDATESITE_DIR):
+if not os.path.exists(updatesite_dir):
     try:
-        os.mkdir(UPDATESITE_DIR)
+        os.mkdir(updatesite_dir)
     except:
-        print "Failed to create missing directory " + UPDATESITE_DIR + "."
+        print "Failed to create missing directory " + updatesite_dir + "."
         sys.exit(1)
 
-UPDATESITE_BACKUP_DIR = UPDATESITE_DIR + ".backups"
+updatesite_backup_dir = updatesite_dir + ".backups"
 
 # Make sure there's a directory to backup the update directory to.
-if not os.path.exists(UPDATESITE_BACKUP_DIR):
-    os.mkdir(UPDATESITE_BACKUP_DIR)
+if not os.path.exists(updatesite_backup_dir):
+    os.mkdir(updatesite_backup_dir)
 
 # Backup the current updatesite.
-DATE= calendar.timegm(time.strptime(time.strftime('%a %b %d %H:%M:%S %Y', time.localtime())))
-print "Backing up " + UPDATESITE_DIR + " to " + UPDATESITE_BACKUP_DIR + os.path.sep + str(DATE)
+date = calendar.timegm(time.strptime(time.strftime('%a %b %d %H:%M:%S %Y', time.localtime())))
+print "Backing up " + updatesite_dir + " to " + updatesite_backup_dir + os.path.sep + str(date)
 
 
-subprocess.call([sys.executable, TRUNK_DIR + "/dist/update_software.py", TRUNK_DIR, PUBLIC_KEY_FILE, PRIVATE_KEY_FILE, UPDATESITE_DIR])
+subprocess.call([sys.executable, trunk_dir + "/dist/update_software.py", trunk_dir, public_key_file, private_key_file, updatesite_dir])
 
 print "Done."
