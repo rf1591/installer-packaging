@@ -16,8 +16,8 @@ import datetime
 import calendar
 
 trunk_dir = '/home/cib/custominstallerbuilder/DEPENDENCIES'
-public_key_file = '/root/xuefeng.publickey'
-private_key_file = '/root/xuefeng.privatekey'
+public_key_file = '/path/to/softwareupdater.publickey'
+private_key_file = '/path/to/softwareupdater.privatekey'
 
 update_url = 'http://blackbox.poly.edu/updatesite/'
 
