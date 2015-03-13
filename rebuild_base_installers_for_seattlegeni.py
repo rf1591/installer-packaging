@@ -97,7 +97,7 @@ def rebuild_base_installers(newversion):
   print "Building new base installers at " + base_installer_directory
 
   try:
-    subprocess.call([sys.executable, 'make_base_installers.py', 'a', repo_parent_dir, public_key_file, private_key_file, base_installer_directory, version])
+    subprocess.call([sys.executable, repo_parent_dir + '/dist/make_base_installers.py', 'a', repo_parent_dir, public_key_file, private_key_file, base_installer_directory, version])
   except:
     print "Building base installers failed."
     sys.exit(1)
