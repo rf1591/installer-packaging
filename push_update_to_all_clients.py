@@ -22,7 +22,7 @@ import shutil
 from softwareupdater import softwareupdatepublickey
 from softwareupdater import softwareurl
 
-trunk_dir = '/home/cib/custominstallerbuilder/DEPENDENCIES'
+trunk_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES")
 public_key_file = '/path/to/publickey'
 private_key_file = '/path/to/privatekey'
 
