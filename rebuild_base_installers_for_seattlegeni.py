@@ -35,11 +35,11 @@ def rebuild_base_installers(newversion):
   software_update_key['e'] = int(e)
   software_update_key['n'] = int(n)
 
-  repo_parent_dir='/home/cib/custominstallerbuilder/DEPENDENCIES'
+  repo_parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES")
 
-  base_installer_directory='/home/cib/baseinstaller'
+  base_installer_directory ='/home/cib/baseinstaller'
 
-  base_installer_archive_dir='/home/cib/baseinstaller/old_base_installers'
+  base_installer_archive_dir ='/home/cib/baseinstaller/old_base_installers'
 
   user='cib'
 
