@@ -1,0 +1,12 @@
+./*
+DEPENDENCIES/dist/*
+DEPENDENCIES/nodemanager/*
+DEPENDENCIES/softwareupdater/*
+DEPENDENCIES/common/*
+DEPENDENCIES/portability/*
+DEPENDENCIES/repy_v2/*
+DEPENDENCIES/seattlelib_v2/*
+DEPENDENCIES/affix/*
+DEPENDENCIES/affix/components/*
+DEPENDENCIES/resource/*
+DEPENDENCIES/seash/*
