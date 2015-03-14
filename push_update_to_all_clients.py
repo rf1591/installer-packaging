@@ -52,8 +52,6 @@ def push_update():
     print "Did not find the correct update key in softwareupdater.py"
     sys.exit(1)
 
-  
-
   if len(sys.argv) > 1:
   # Note that the -d option in update_software.py isn't a really convincing idea if you can
   # just pass a different directory.
