@@ -15,4 +15,19 @@ and make it compatible with SeattleTestbed/buildscripts.
 Architectural discussion will follow below.
 
 ------
+Overview of installer-package:
 
+First of all, running initialize.py to download all files which we need to
+DEPENDIENCES folder.
+
+Secondly, running build.py to move all the platform-specific stuff and the
+seattleinstaller into RUNNABLE folder. Since there is a new function( add
+subdirectory) in new build scripts, we can move general files
+to RUNNABLE/seattle_repy, and move specified files to RUNNABLE/seattle_mac,
+RUNNABLE/seattle_linux... We need set config_build.txt based on the requirement
+of each platforms,creating different subdirectories for different
+platforms.
+
+Finally, moving platform-specific stuff and the seattleinstaller under
+RUNNABLE into base installer directory, then merging them together and create the
+actual zip/gz/tar.gz files.
