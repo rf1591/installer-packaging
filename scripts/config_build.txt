@@ -10,3 +10,92 @@ DEPENDENCIES/affix/*
 DEPENDENCIES/affix/components/*
 DEPENDENCIES/resource/*
 DEPENDENCIES/seash/*
+
+# linux
+DEPENDENCIES/dist/script_wrappers/linux/* seattle_linux
+DEPENDENCIES/dist/mac/scripts/* seattle_linux/seattle_repy
+DEPENDENCIES/common/LICENSE seattle_linux
+
+# mac
+DEPENDENCIES/dist/script_wrappers/mac/* seattle_mac
+DEPENDENCIES/dist/mac/scripts/* seattle_mac/seattle_repy
+DEPENDENCIES/common/LICENSE seattle_mac
+
+# windows
+DEPENDENCIES/dist/script_wrappers/win/* seattle_win
+DEPENDENCIES/dist/win/scripts/* seattle_win/seattle_repy
+DEPENDENCIES/dist/win/* seattle_win/seattle_repy
+DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win/seattle_repy/pyreadline/clipboard
+DEPENDENCIES/seash/pyreadline/console/* seattle_win/seattle_repy/pyreadline/console
+DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win/seattle_repy/pyreadline/keysyms
+DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_win/seattle_repy/pyreadline/lineeditor
+DEPENDENCIES/seash/pyreadline/modes/* seattle_win/seattle_repy/pyreadline/modes
+DEPENDENCIES/seash/pyreadline/* seattle_win/seattle_repy/pyreadline
+DEPENDENCIES/common/LICENSE seattle_win
+
+# android
+DEPENDENCIES/dist/script_wrappers/linux/* seattle_android
+DEPENDENCIES/dist/mac/scripts/* seattle_android/seattle_repy
+DEPENDENCIES/common/LICENSE seattle_android
+
+# win_mob
+DEPENDENCIES/dist/winmob/scripts/* seattle_win_mob/seattle_repy
+DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win_mob/seattle_repy/pyreadline/clipboard
+DEPENDENCIES/seash/pyreadline/console/* seattle_win_mob/seattle_repy/pyreadline/console
+DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win_mob/seattle_repy/pyreadline/keysyms
+DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_win_mob/seattle_repy/pyreadline/lineeditor
+DEPENDENCIES/seash/pyreadline/modes/* seattle_win_mob/seattle_repy/pyreadline/modes
+DEPENDENCIES/seash/pyreadline/* seattle_win_mob/seattle_repy/pyreadline
+DEPENDENCIES/common/LICENSE seattle_win_mob
+
+# Affix framework and components
+DEPENDENCIES/affix/* seattle_repy
+DEPENDENCIES/affix/components/* seattle_repy
+DEPENDENCIES/affix/services/tcp_relay/* seattle_repy
+
+# Nodemanager and RepyV2 runtime
+DEPENDENCIES/nodemanager/* seattle_repy
+DEPENDENCIES/portability/* seattle_repy
+DEPENDENCIES/seattlelib_v2/* seattle_repy
+DEPENDENCIES/repy_v2/* seattle_repy
+
+# RepyV2 runtime for vessels
+DEPENDENCIES/repy_v2/* seattle_repy/repy_v2
+DEPENDENCIES/portability/* seattle_repy/repy_v2
+DEPENDENCIES/seattlelib_v2/dylink.r2py seattle_repy/repy_v2
+DEPENDENCIES/seattlelib_v2/textops.py seattle_repy/repy_v2
+DEPENDENCIES/nodemanager/servicelogger.py seattle_repy/repy_v2
+
+# RepyV1 runtime for vessels
+DEPENDENCIES/repy_v1/* seattle_repy/repy_v1
+
+# Seash
+DEPENDENCIES/seash/* seattle_repy
+DEPENDENCIES/seash/pyreadline/clipboard/* seattle_repy/pyreadline/clipboard
+DEPENDENCIES/seash/pyreadline/console/* seattle_repy/pyreadline/console
+DEPENDENCIES/seash/pyreadline/keysyms/* seattle_repy/pyreadline/keysyms
+DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_repy/pyreadline/lineeditor
+DEPENDENCIES/seash/pyreadline/modes/* seattle_repy/pyreadline/modes
+DEPENDENCIES/seash/pyreadline/* seattle_repy/pyreadline
+DEPENDENCIES/seash/modules/clearinghouse/* seattle_repy/modules/clearinghouse
+DEPENDENCIES/seash/modules/factoids/* seattle_repy/modules/factoids
+DEPENDENCIES/seash/modules/geoip/* seattle_repy/modules/geoip
+DEPENDENCIES/seash/modules/modules/* seattle_repy/modules/modules
+DEPENDENCIES/seash/modules/variables/* seattle_repy/modules/variables
+
+# Clearinghouse XML-RPC interface
+DEPENDENCIES/common/seattleclearinghouse_xmlrpc.py seattle_repy
+
+# Software updater
+DEPENDENCIES/softwareupdater/* seattle_repy
+DEPENDENCIES/dist/update_crontab_entry.py seattle_repy
+
+# The license must be included in anything we distribute.
+DEPENDENCIES/common/LICENSE seattle_repy
+
+# the benchmarking scripts
+DEPENDENCIES/resource/* seattle_repy
+
+# dist
+DEPENDENCIES/dist/* seattle_repy
+
