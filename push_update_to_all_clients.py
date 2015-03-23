@@ -22,6 +22,8 @@ import shutil
 from softwareupdater import softwareupdatepublickey
 from softwareupdater import softwareurl
 
+import package_installers
+
 trunk_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES")
 public_key_file = '/path/to/publickey'
 private_key_file = '/path/to/privatekey'
@@ -52,12 +54,6 @@ def push_update():
     print "Did not find the correct update key in softwareupdater.py"
     sys.exit(1)
 
-  if len(sys.argv) > 1:
-  # Note that the -d option in update_software.py isn't a really convincing idea if you can
-  # just pass a different directory.
-    updatesite_dir = debug_updatesite_dir
-    print "An argument was provided. Using debug mode (so, putting files in " + updatesite_dir + ")."
-
   # The update_software.py script does weird things if the directory doesn't already exist,
   # such as creating a file with the name of the directory.
   if not os.path.exists(updatesite_dir):
@@ -78,8 +74,8 @@ def push_update():
   print "Backing up " + updatesite_dir + " to " + updatesite_backup_dir + os.path.sep + str(date)
   shutil.copytree(updatesite_dir,updatesite_backup_dir + os.path.sep + str(date))
 
-  subprocess.call([sys.executable, trunk_dir + '/dist/update_software.py', trunk_dir, public_key_file, private_key_file, updatesite_dir])
-
+  package_installers.prepare_gen_files(updatesite_dir,private_key_file,public_key_file)
+  
   print "Done."
 
 def main():
