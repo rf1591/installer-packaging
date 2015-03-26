@@ -24,27 +24,26 @@ from softwareupdater import softwareurl
 
 import package_installers
 
-trunk_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES")
-public_key_file = '/path/to/publickey'
-private_key_file = '/path/to/privatekey'
+from repyportability import *
+add_dy_support(locals())
+
+dy_import_module_symbols("rsa.r2py")
+
+dependencies_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES")
+
+public_key_file = ''
+
+private_key_file = ''
 
 update_url = 'http://blackbox.poly.edu/updatesite/'
+
+updatesite_dir = '/var/www/updatesite'
 
 # Sanity check to make sure the key embedded in softwareupdater.py is the same
 # key we're signing with. The only time this would not be the case is if the
 # update key is being changed.
-def push_update():
-  updatesite_dir = '/var/www/updatesite'
-  debug_updatesite_dir = updatesite_dir+ '-test'
-
-  publickeyfile = open(public_key_file, 'r')
-  content = publickeyfile.readline()
-  e = content.partition(" ")[0]
-  n = content.partition(" ")[2]
-
-  update_pubkey_string = {}
-  update_pubkey_string['e'] = int(e)
-  update_pubkey_string['n'] = int(n)
+def push_update():  
+  update_pubkey_string = rsa_file_to_publickey(public_key_file)
 
   if not update_url == softwareurl:
     print "Did not find the correct update url in softwareupdater.py" 
@@ -71,7 +70,9 @@ def push_update():
 
   # Backup the current updatesite.
   date = calendar.timegm(time.strptime(time.strftime('%a %b %d %H:%M:%S %Y', time.localtime())))
+
   print "Backing up " + updatesite_dir + " to " + updatesite_backup_dir + os.path.sep + str(date)
+
   shutil.copytree(updatesite_dir,updatesite_backup_dir + os.path.sep + str(date))
 
   package_installers.prepare_gen_files(updatesite_dir,private_key_file,public_key_file)
@@ -79,6 +80,14 @@ def push_update():
   print "Done."
 
 def main():
+  if not public_key_file:
+    print "public_key_file isn't set." 
+    sys.exit(1)
+
+  if not private_key_file:
+    print "private_key_file isn't set." 
+    sys.exit(1)
+
   push_update()
 
 if __name__ == '__main__':
