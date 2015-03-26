@@ -1,3 +1,22 @@
+"""
+<Program>
+  package_installers.py
+
+<Date Started>
+  March 22, 2015
+
+<Author>
+  Xuefeng Huang
+
+<Purpose>
+
+  This is a library used by the other packaging components. It provides
+  various functions to package the installation files for different platforms
+  we supported. It helps new packaging script that generates Seattle
+  installers for different platforms using the new build harness.
+
+"""
+
 import os
 import sys
 import shutil
@@ -30,7 +49,7 @@ def copyfiles(base_installer_directory):
     None
   """  
 
-  installer_files = ['seattle_mac','seattle_linux','seattle_android','seattle_win','seattle_win_mob','seattle_repy']
+  installer_files = ['seattle_mac','seattle_linux','seattle_android','seattle_win','seattle_repy']
 
   for files in installer_files:
     os.mkdir(base_installer_directory + os.sep + files)
@@ -123,10 +142,10 @@ def make_zipfile(output_filename, source_dir):
 
   shutil.rmtree(source_dir)
 
-def package_win_or_winmob(base_installer_directory,version):
+def package_win(base_installer_directory,version):
   """
   <Purpose>
-    Packages the installation files for Windows or Windows Mobile into a zipfile
+    Packages the installation files for Windows into a zipfile
     and adds the specific installation scripts for this OS.
 
   <Arguments>
@@ -145,14 +164,13 @@ def package_win_or_winmob(base_installer_directory,version):
     None.  
    """
 
-  installer_files = ['seattle_win','seattle_win_mob']
+  installer_files = ['seattle_win']
   
   for files in installer_files:
      build_component.copy_tree_to_target(base_installer_directory + os.sep + 'seattle_repy',base_installer_directory + os.sep + files + os.sep + 'seattle_repy')
   
   os.chdir(base_installer_directory)
   make_zipfile('seattle_'+ version +'_win.zip',base_installer_directory +os.sep+'seattle_win')
-  make_zipfile('seattle_'+ version +'_win_mob.zip',base_installer_directory +os.sep+'seattle_win_mob')
 
 def package_linux_or_mac(base_installer_directory,version):
   """
@@ -307,7 +325,7 @@ def package_installers(base_installer_directory,version,privkey,pubkey):
   copyfiles(base_installer_directory)
   write_metainfo(base_installer_directory + os.sep + 'seattle_repy',privkey,pubkey)
 
-  package_win_or_winmob(base_installer_directory,version)
+  package_win(base_installer_directory,version)
   package_linux_or_mac(base_installer_directory,version)
   package_android(base_installer_directory,version)
 
