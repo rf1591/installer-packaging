@@ -38,16 +38,6 @@ DEPENDENCIES/dist/script_wrappers/linux/* seattle_android
 DEPENDENCIES/dist/mac/scripts/* seattle_android/seattle_repy
 DEPENDENCIES/common/LICENSE seattle_android
 
-# win_mob
-DEPENDENCIES/dist/winmob/scripts/* seattle_win_mob/seattle_repy
-DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win_mob/seattle_repy/pyreadline/clipboard
-DEPENDENCIES/seash/pyreadline/console/* seattle_win_mob/seattle_repy/pyreadline/console
-DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win_mob/seattle_repy/pyreadline/keysyms
-DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_win_mob/seattle_repy/pyreadline/lineeditor
-DEPENDENCIES/seash/pyreadline/modes/* seattle_win_mob/seattle_repy/pyreadline/modes
-DEPENDENCIES/seash/pyreadline/* seattle_win_mob/seattle_repy/pyreadline
-DEPENDENCIES/common/LICENSE seattle_win_mob
-
 # Affix framework and components
 DEPENDENCIES/affix/* seattle_repy
 DEPENDENCIES/affix/components/* seattle_repy
