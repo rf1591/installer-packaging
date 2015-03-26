@@ -22,28 +22,27 @@ from nmmain import version
 
 import package_installers
 
+from repyportability import *
+add_dy_support(locals())
+
+dy_import_module_symbols("rsa.r2py")
+
 software_update_url= 'http://blackbox.poly.edu/updatesite/'
-public_key_file = '/path/to/publickey'
-private_key_file = '/path/to/privatekey'
 
-def rebuild_base_installers(newversion):
-  publickeyfile = open(public_key_file, 'r')
-  content = publickeyfile.readline()
-  content.partition(" ")
-  e = content.partition(" ")[0]
-  n = content.partition(" ")[2]
+public_key_file = ''
 
-  software_update_key = {}
-  software_update_key['e'] = int(e)
-  software_update_key['n'] = int(n)
+private_key_file = ''
+
+base_installer_directory ='/home/cib/baseinstaller'
+
+base_installer_archive_dir ='/home/cib/baseinstaller/old_base_installers'
+
+user='cib'
+
+def rebuild_base_installers(newversion):                                         
+  software_update_key = rsa_file_to_publickey(public_key_file)
 
   repo_parent_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES")
-
-  base_installer_directory ='/home/cib/baseinstaller'
-
-  base_installer_archive_dir ='/home/cib/baseinstaller/old_base_installers'
-
-  user='cib'
 
   # Check variables first
   if newversion == "":
@@ -100,6 +99,7 @@ def rebuild_base_installers(newversion):
 
   try:
     package_installers.package_installers(base_installer_directory, version, private_key_file, public_key_file)
+
   except:
     print "Building base installers failed."
     sys.exit(1)
@@ -108,7 +108,7 @@ def rebuild_base_installers(newversion):
 
   os.chdir(base_installer_directory)
 
-  if not os.path.exists("seattle_"+ version +"_android.zip") or not os.path.exists("seattle_"+ version +"_linux.tgz") or not os.path.exists("seattle_"+ version +"_mac.tgz") or not os.path.exists("seattle_"+ version +"_win.zip")or not os.path.exists("seattle_"+ version +"_win_mob.zip"):
+  if not os.path.exists("seattle_"+ version +"_android.zip") or not os.path.exists("seattle_"+ version +"_linux.tgz") or not os.path.exists("seattle_"+ version +"_mac.tgz"):
     print "The base installers don't appear to have been created."
     sys.exit(1)
 
@@ -121,12 +121,24 @@ def rebuild_base_installers(newversion):
   os.symlink("seattle_" + version + "_linux.tgz", 'seattle_linux.tgz')
   os.symlink("seattle_" + version + "_mac.tgz", 'seattle_mac.tgz')
   os.symlink("seattle_" + version + "_win.zip", 'seattle_win.zip')
-  os.symlink("seattle_" + version + "_win_mob.zip", 'seattle_win_mob.zip')
 
   print 'New base installers created and installed for seattlegeni.'
 
 def main():
-  newversion = sys.argv[1]
+  if not public_key_file:
+    print "public_key_file isn't set." 
+    sys.exit(1)
+
+  if not private_key_file:
+    print "private_key_file isn't set."
+    sys.exit(1)
+
+  try:
+    newversion = sys.argv[1]
+  except:
+    print "Usage: python ./rebuild_base_installers_for_seattlegeni.py version_STRING" 
+    sys.exit(1)
+
   rebuild_base_installers(newversion)
 
 if __name__ == '__main__':
