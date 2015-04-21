@@ -12,19 +12,19 @@ DEPENDENCIES/resource/*
 DEPENDENCIES/seash/*
 
 # linux
-DEPENDENCIES/dist/script_wrappers/linux/* seattle_linux
-DEPENDENCIES/dist/mac/scripts/* seattle_linux/seattle_repy
+./script_wrappers/linux/* seattle_linux
+./mac/scripts/* seattle_linux/seattle_repy
 DEPENDENCIES/common/LICENSE seattle_linux
 
 # mac
-DEPENDENCIES/dist/script_wrappers/mac/* seattle_mac
-DEPENDENCIES/dist/mac/scripts/* seattle_mac/seattle_repy
+./script_wrappers/mac/* seattle_mac
+./mac/scripts/* seattle_mac/seattle_repy
 DEPENDENCIES/common/LICENSE seattle_mac
 
 # windows
-DEPENDENCIES/dist/script_wrappers/win/* seattle_win
-DEPENDENCIES/dist/win/scripts/* seattle_win/seattle_repy
-DEPENDENCIES/dist/win/* seattle_win/seattle_repy
+./script_wrappers/win/* seattle_win
+./win/scripts/* seattle_win/seattle_repy
+./win/* seattle_win/seattle_repy
 DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win/seattle_repy/pyreadline/clipboard
 DEPENDENCIES/seash/pyreadline/console/* seattle_win/seattle_repy/pyreadline/console
 DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win/seattle_repy/pyreadline/keysyms
@@ -34,8 +34,8 @@ DEPENDENCIES/seash/pyreadline/* seattle_win/seattle_repy/pyreadline
 DEPENDENCIES/common/LICENSE seattle_win
 
 # android
-DEPENDENCIES/dist/script_wrappers/linux/* seattle_android
-DEPENDENCIES/dist/mac/scripts/* seattle_android/seattle_repy
+./script_wrappers/linux/* seattle_android
+./mac/scripts/* seattle_android/seattle_repy
 DEPENDENCIES/common/LICENSE seattle_android
 
 # Affix framework and components
@@ -88,4 +88,5 @@ DEPENDENCIES/resource/* seattle_repy
 
 # dist
 DEPENDENCIES/dist/* seattle_repy
+
 
