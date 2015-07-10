@@ -1,12 +1,71 @@
-'''
-This will update the base installers used by seattelgeni from what
-is currently checked out as trunk. See constants below.
+"""
+<Program Name>
+  rebuild_base_installers.py
 
-You will need sudo privileges to use this. Don't run this as sudo, it will
-invoke sudo when it needs it.
 
-Usage: python ./rebuild_base_installers_for_seattlegeni.py version_STRING
-'''
+<Purpose>
+  This program creates new base installers for the Custom Installer Builder. 
+  (A base installer is a Seattle installer that lacks the user keys and 
+  assigned resource proportions per a `vesselinfo` file. It cannot be 
+  installed as-is. The Custom Installer Builder will add the required 
+  file to make a fully working installer.)
+
+  It is assumed that you followed the steps to check out the required 
+  dependencies (via `./scripts/initialize.py`) and build the initial 
+  directory layout (via `./scripts/build.py`) as outlined in 
+  `README.md` already.
+
+
+<Usage>
+  Configuration
+  =============
+  Before starting this program, adapt the configuration variables 
+  below to suit your setup. These include the softwareupdater URL 
+  and key files, the nodemanager version string your installers will 
+  use, the user name for which to build the installers, the desired 
+  output dir for new installers, and the backup dir for old installers.
+
+  Make sure that the directories exist. Also, ensure that your 
+  `seattle_repy/softwareupdater.py`'s software updater URL and 
+  public key agree with what is given here.
+  BE VERY CAREFUL about the softwareupdater-related items. 
+  Making mistakes here will likely result in installers that you 
+  will not be able to push updates to!
+
+  Execution
+  =========
+  Once configured, run this program under a user account with `sudo` 
+  privileges. (Don't run under `sudo` right away, we will invoke it 
+  when we need it.)
+
+    python ./rebuild_base_installers.py NODEMANAGER_VERSION_STRING
+
+  We force you to give `seattle_repy/nmmain.py`'s version string 
+  on the command line when you want to rebuild, so that your shell's 
+  history contains a record of what you did.
+
+
+<Historical Footnote>
+  This program is a Python port of the shell script used for this purpose 
+  previously, `rebuild_base_installers_for_seattlegeni.sh`
+"""
+
+###########################################################
+# Customize the variables below to your setup / config!
+
+software_update_url = 'http://blackbox.poly.edu/updatesite/'
+public_key_file = '/full/path/to/softwareupdater.publickey'
+private_key_file = '/full/path/to/softwareupdater.privatekey'
+
+base_installer_directory = '/full/path/to/baseinstaller/target/dir'
+base_installer_archive_dir = '/full/path/to/baseinstaller/archive'
+
+user = 'installer_package_owner'
+
+# End of customizable config items
+###########################################################
+
+
 import sys
 import string
 import os
@@ -27,17 +86,6 @@ add_dy_support(locals())
 
 dy_import_module_symbols("rsa.r2py")
 
-software_update_url= 'http://blackbox.poly.edu/updatesite/'
-
-public_key_file = ''
-
-private_key_file = ''
-
-base_installer_directory ='/home/cib/baseinstaller'
-
-base_installer_archive_dir ='/home/cib/baseinstaller/old_base_installers'
-
-user='cib'
 
 def rebuild_base_installers(newversion):                                         
   software_update_key = rsa_file_to_publickey(public_key_file)
