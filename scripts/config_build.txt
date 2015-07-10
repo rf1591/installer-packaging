@@ -1,48 +1,26 @@
+################################################################
+# These are the dependencies of the installer packaging scripts
 ./*
-DEPENDENCIES/nodemanager/*
-DEPENDENCIES/softwareupdater/*
 DEPENDENCIES/common/*
 DEPENDENCIES/portability/*
 DEPENDENCIES/repy_v2/*
 DEPENDENCIES/seattlelib_v2/*
-DEPENDENCIES/affix/*
-DEPENDENCIES/affix/components/*
-DEPENDENCIES/resource/*
-DEPENDENCIES/seash/*
 
-# linux
-./script_wrappers/linux/* seattle_linux
-./mac/scripts/* seattle_linux/seattle_repy
 
-# mac
-./script_wrappers/mac/* seattle_mac
-./mac/scripts/* seattle_mac/seattle_repy
-
-# windows
-./script_wrappers/win/* seattle_win
-./win/scripts/* seattle_win/seattle_repy
-./win/* seattle_win/seattle_repy
-DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win/seattle_repy/pyreadline/clipboard
-DEPENDENCIES/seash/pyreadline/console/* seattle_win/seattle_repy/pyreadline/console
-DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win/seattle_repy/pyreadline/keysyms
-DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_win/seattle_repy/pyreadline/lineeditor
-DEPENDENCIES/seash/pyreadline/modes/* seattle_win/seattle_repy/pyreadline/modes
-DEPENDENCIES/seash/pyreadline/* seattle_win/seattle_repy/pyreadline
-
-# android
-./script_wrappers/linux/* seattle_android
-./mac/scripts/* seattle_android/seattle_repy
-
-# Affix framework and components
-DEPENDENCIES/affix/* seattle_repy
-DEPENDENCIES/affix/components/* seattle_repy
-DEPENDENCIES/affix/services/tcp_relay/* seattle_repy
+################################################################
+# These are the nodemanager's and runtime's dependencies
+# (i.e. all of the platform-independent code).
 
 # Nodemanager and RepyV2 runtime
 DEPENDENCIES/nodemanager/* seattle_repy
 DEPENDENCIES/portability/* seattle_repy
 DEPENDENCIES/seattlelib_v2/* seattle_repy
 DEPENDENCIES/repy_v2/* seattle_repy
+
+# Affix framework and components
+DEPENDENCIES/affix/* seattle_repy
+DEPENDENCIES/affix/components/* seattle_repy
+DEPENDENCIES/affix/services/tcp_relay/* seattle_repy
 
 # RepyV2 runtime for vessels
 DEPENDENCIES/repy_v2/* seattle_repy/repyV2
@@ -53,6 +31,12 @@ DEPENDENCIES/nodemanager/servicelogger.py seattle_repy/repyV2
 
 # RepyV1 runtime for vessels
 DEPENDENCIES/repy_v1/* seattle_repy/repyV1
+
+# Software updater
+DEPENDENCIES/softwareupdater/* seattle_repy
+
+# Installer benchmarking scripts
+DEPENDENCIES/resource/* seattle_repy
 
 # Seash
 DEPENDENCIES/seash/* seattle_repy
@@ -68,15 +52,36 @@ DEPENDENCIES/seash/modules/geoip/* seattle_repy/modules/geoip
 DEPENDENCIES/seash/modules/modules/* seattle_repy/modules/modules
 DEPENDENCIES/seash/modules/variables/* seattle_repy/modules/variables
 
-# Clearinghouse XML-RPC interface
+# Clearinghouse XML-RPC interface for seash's "clearinghouse" module
 DEPENDENCIES/common/seattleclearinghouse_xmlrpc.py seattle_repy
 
-# Software updater
-DEPENDENCIES/softwareupdater/* seattle_repy
-
-# The license must be included in anything we distribute.
+# License
 DEPENDENCIES/common/LICENSE seattle_repy
 
-# the benchmarking scripts
-DEPENDENCIES/resource/* seattle_repy
+
+################################################################
+# Below follow the platform-specific things
+
+# Linux
+./script_wrappers/linux/* seattle_linux
+./linux/scripts/* seattle_linux/seattle_repy
+
+# Mac
+./script_wrappers/mac/* seattle_mac
+./mac/scripts/* seattle_mac/seattle_repy
+
+# Windows
+./script_wrappers/win/* seattle_win
+./win/scripts/* seattle_win/seattle_repy
+./win/* seattle_win/seattle_repy
+DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win/seattle_repy/pyreadline/clipboard
+DEPENDENCIES/seash/pyreadline/console/* seattle_win/seattle_repy/pyreadline/console
+DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win/seattle_repy/pyreadline/keysyms
+DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_win/seattle_repy/pyreadline/lineeditor
+DEPENDENCIES/seash/pyreadline/modes/* seattle_win/seattle_repy/pyreadline/modes
+DEPENDENCIES/seash/pyreadline/* seattle_win/seattle_repy/pyreadline
+
+# Android
+./script_wrappers/linux/* seattle_android
+./linux/scripts/* seattle_android/seattle_repy
 
