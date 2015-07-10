@@ -1,5 +1,4 @@
 ./*
-DEPENDENCIES/dist/*
 DEPENDENCIES/nodemanager/*
 DEPENDENCIES/softwareupdater/*
 DEPENDENCIES/common/*
@@ -78,15 +77,10 @@ DEPENDENCIES/common/seattleclearinghouse_xmlrpc.py seattle_repy
 
 # Software updater
 DEPENDENCIES/softwareupdater/* seattle_repy
-DEPENDENCIES/dist/update_crontab_entry.py seattle_repy
 
 # The license must be included in anything we distribute.
 DEPENDENCIES/common/LICENSE seattle_repy
 
 # the benchmarking scripts
 DEPENDENCIES/resource/* seattle_repy
-
-# dist
-DEPENDENCIES/dist/* seattle_repy
-
 
