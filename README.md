@@ -1,33 +1,46 @@
 # installer-packaging
 
-This repository will collect the various parts (code, tools, other content) 
-that are necessary to build and package Seattle installers for the main 
-operating systems and platforms we support.
+This repository provides the various parts (code, tools, other content) 
+that are necessary to build and package Seattle *base installers* for the main 
+operating systems and platforms we support. In their current form, the tools 
+are intended for use only in the 
+[Custom Installer Builder](https://github.com/SeattleTestbed/custominstallerbuilder)
+and/or CIB admins, not end users.
 
-Tools will include
-* A new packaging script that generates Seattle installers for different platforms 
-using the new build harness, and
-* A new tool to sign and push software updates.
+Each base installer contains the Seattle runtime, nodemanager, etc., and all 
+of the platform abstractions required to install, run, and autostart Seattle, 
+*but* lacks the user keys (in the form of the `vesselinfo` file) required to 
+actually perform the installation and provide remote-accessible resources 
+afterwards.
+The CIB knows how to create this `vesselinfo` file and add it so that the resulting 
+installer is complete.
 
-For this, we will refactor a few tools and code out of SeattleTestbed/dist, 
-and make it compatible with SeattleTestbed/buildscripts.
+Tools include
+* A packaging script that generates Seattle installers for different platforms, and
+* A script to sign and "push" (put in the appropriate web server dir) software updates.
 
-Architectural discussion will follow below.
 
 ------
-Overview of installer-package:
+# Using this repo
 
-First of all, running initialize.py to download all files which we need to
-DEPENDIENCES folder.
+Clone this repo, then run the initialization script (which git-clones all 
+of installer-packaging's dependencies) and build script (which prepares 
+the Python source files and platform-specific installer stuff).
 
-Secondly, running build.py to move all the platform-specific stuff and the
-seattleinstaller into RUNNABLE folder. Since there is a new function( add
-subdirectory) in new build scripts, we can move general files
-to RUNNABLE/seattle_repy, and move specified files to RUNNABLE/seattle_mac,
-RUNNABLE/seattle_linux... We need set config_build.txt based on the requirement
-of each platforms,creating different subdirectories for different
-platforms.
+```bash
+$ git clone https://github.com/SeattleTestbed/installer-packaging
+$ cd installer-packaging/scripts
+$ python initialize.py
+$ python build.py
+```
 
-Finally, moving platform-specific stuff and the seattleinstaller under
-RUNNABLE into base installer directory, then merging them together and create the
-actual zip/gz/tar.gz files.
+Several new directories are created thus:
+* `../RUNNABLE` now contains the script to build new base installers,
+* `../RUNNABLE/seattle_repy` holds the general Seattle runtime, nodemanager, 
+etc.,
+* and `../RUNNABLE/seattle_linux`, `../RUNNABLE/seattle_mac` and so on 
+have the platform-specific files.
+
+The `rebuild_base_installers` script then copies the generic and 
+platform-specific stuff into base installer directories, and creates the
+actual zip/gz/tar.gz files that the Custom Installer Builder expects.
