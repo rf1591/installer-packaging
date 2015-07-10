@@ -75,6 +75,13 @@ import pwd
 import grp
 import glob
 
+# Add `./seattle_repy` to the sys path so we can import and check the 
+# actual files thaast will end up in the base installers.
+# We can do this as `./seattle_repy` is on the same hierarchy 
+# level in the filesystem as this program file.
+my_path = os.path.abspath(os.path.dirname(__file__))
+seattle_repy_path = os.path.join(my_path, "seattle_repy")
+sys.path.insert(0, seattle_repy_path)
 from softwareupdater import softwareupdatepublickey
 from softwareupdater import softwareurl
 from nmmain import version
