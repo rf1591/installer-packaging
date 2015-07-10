@@ -13,12 +13,10 @@ DEPENDENCIES/seash/*
 # linux
 ./script_wrappers/linux/* seattle_linux
 ./mac/scripts/* seattle_linux/seattle_repy
-DEPENDENCIES/common/LICENSE seattle_linux
 
 # mac
 ./script_wrappers/mac/* seattle_mac
 ./mac/scripts/* seattle_mac/seattle_repy
-DEPENDENCIES/common/LICENSE seattle_mac
 
 # windows
 ./script_wrappers/win/* seattle_win
@@ -30,12 +28,10 @@ DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win/seattle_repy/pyreadline/keys
 DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_win/seattle_repy/pyreadline/lineeditor
 DEPENDENCIES/seash/pyreadline/modes/* seattle_win/seattle_repy/pyreadline/modes
 DEPENDENCIES/seash/pyreadline/* seattle_win/seattle_repy/pyreadline
-DEPENDENCIES/common/LICENSE seattle_win
 
 # android
 ./script_wrappers/linux/* seattle_android
 ./mac/scripts/* seattle_android/seattle_repy
-DEPENDENCIES/common/LICENSE seattle_android
 
 # Affix framework and components
 DEPENDENCIES/affix/* seattle_repy
