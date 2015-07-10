@@ -45,14 +45,14 @@ DEPENDENCIES/seattlelib_v2/* seattle_repy
 DEPENDENCIES/repy_v2/* seattle_repy
 
 # RepyV2 runtime for vessels
-DEPENDENCIES/repy_v2/* seattle_repy/repy_v2
-DEPENDENCIES/portability/* seattle_repy/repy_v2
-DEPENDENCIES/seattlelib_v2/dylink.r2py seattle_repy/repy_v2
-DEPENDENCIES/seattlelib_v2/textops.py seattle_repy/repy_v2
-DEPENDENCIES/nodemanager/servicelogger.py seattle_repy/repy_v2
+DEPENDENCIES/repy_v2/* seattle_repy/repyV2
+DEPENDENCIES/portability/* seattle_repy/repyV2
+DEPENDENCIES/seattlelib_v2/dylink.r2py seattle_repy/repyV2
+DEPENDENCIES/seattlelib_v2/textops.py seattle_repy/repyV2
+DEPENDENCIES/nodemanager/servicelogger.py seattle_repy/repyV2
 
 # RepyV1 runtime for vessels
-DEPENDENCIES/repy_v1/* seattle_repy/repy_v1
+DEPENDENCIES/repy_v1/* seattle_repy/repyV1
 
 # Seash
 DEPENDENCIES/seash/* seattle_repy
