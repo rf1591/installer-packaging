@@ -11,6 +11,9 @@ DEPENDENCIES/seattlelib_v2/*
 # These are the nodemanager's and runtime's dependencies
 # (i.e. all of the platform-independent code).
 
+# Installer and Seattle stop script
+./all-platforms/* seattle_repy
+
 # Nodemanager and RepyV2 runtime
 DEPENDENCIES/nodemanager/* seattle_repy
 DEPENDENCIES/portability/* seattle_repy
