@@ -24,7 +24,6 @@ import tarfile
 import zipfile
 import subprocess
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES/common/"))
 import build_component
 
 
