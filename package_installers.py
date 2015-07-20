@@ -209,8 +209,10 @@ def package_linux_or_mac(base_installer_directory, version):
       shutil.rmtree(base_installer_directory + os.sep + files + os.sep + 'seattle_repy'+ os.sep + 'pyreadline')
   
   os.chdir(base_installer_directory)
-  make_tarfile('seattle_'+ version +'_mac.tgz',base_installer_directory +os.sep+'seattle_mac')
-  make_tarfile('seattle_'+ version +'_linux.tgz',base_installer_directory +os.sep+'seattle_linux')
+  make_tarfile('seattle_' + version + '_mac.tgz', 
+      os.path.join(base_installer_directory, 'seattle_mac', 'seattle'))
+  make_tarfile('seattle_' + version + '_linux.tgz', 
+      os.path.join(base_installer_directory, 'seattle_linux', 'seattle'))
 
 
 
