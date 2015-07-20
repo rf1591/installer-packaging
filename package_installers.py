@@ -27,16 +27,21 @@ import subprocess
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "../DEPENDENCIES/common/"))
 import build_component
 
-def copyfiles(base_installer_directory):
+
+
+def copyfiles(base_installer_dir):
   """
   <Purpose>
-    Given the base_installer_directory, this function will copy general non-
-    installer-specific files (needed for all installers) and deposit them into
-    the base installer located folder. It also will copy the specific
-    installation scripts for each platforms we support.
+    Take from the current working directory
+      * the general non-installer-specific files ("seattle_repy", needed 
+        for all installers) and 
+      * all of the platform-specific installation/start/stop scripts 
+        ("seattle_linux", "seattle_mac" etc.) for each platforms we support,
+    and copy the directory trees of those into the base installer directory.
+    Further packaging will continure from the base_installer_dir.
     
   <Arguments>
-    base_installer_directory: 
+    base_installer_dir: 
       The directory to put the base installers in
 
   <Exceptions>
@@ -49,14 +54,15 @@ def copyfiles(base_installer_directory):
     None
   """  
 
-  installer_files = ['seattle_mac','seattle_linux','seattle_android','seattle_win','seattle_repy']
+  component_dirs = ['seattle_mac', 'seattle_linux', 'seattle_android', 
+      'seattle_win', 'seattle_repy']
 
-  for files in installer_files:
-    os.mkdir(base_installer_directory + os.sep + files)
+  for component_dir in component_dirs:
+   build_component.copy_tree_to_target(component_dir, 
+       base_installer_dir + os.sep + component_dir)
 
-  for files in installer_files:
-     build_component.copy_tree_to_target(files,base_installer_directory + os.sep + files)
-  
+
+
 def unzip_file():
   """
   <Purpose>

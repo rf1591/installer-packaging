@@ -66,25 +66,25 @@ DEPENDENCIES/common/LICENSE seattle_repy
 # Below follow the platform-specific things
 
 # Linux
-./script_wrappers/linux/* seattle_linux
-./linux/scripts/* seattle_linux/seattle_repy
+./script_wrappers/linux/* seattle_linux/seattle
+./linux/scripts/* seattle_linux/seattle/seattle_repy
 
 # Mac
-./script_wrappers/mac/* seattle_mac
-./mac/scripts/* seattle_mac/seattle_repy
+./script_wrappers/mac/* seattle_mac/seattle
+./mac/scripts/* seattle_mac/seattle/seattle_repy
 
 # Windows
-./script_wrappers/win/* seattle_win
-./win/scripts/* seattle_win/seattle_repy
-./win/* seattle_win/seattle_repy
-DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win/seattle_repy/pyreadline/clipboard
-DEPENDENCIES/seash/pyreadline/console/* seattle_win/seattle_repy/pyreadline/console
+./script_wrappers/win/* seattle_win/seattle
+./win/scripts/* seattle_win/seattle/seattle_repy
+./win/* seattle_win/seattle/seattle_repy
+DEPENDENCIES/seash/pyreadline/clipboard/* seattle_win/seattle/seattle_repy/pyreadline/clipboard
+DEPENDENCIES/seash/pyreadline/console/* seattle_win/seattle/seattle_repy/pyreadline/console
 DEPENDENCIES/seash/pyreadline/keysyms/* seattle_win/seattle_repy/pyreadline/keysyms
 DEPENDENCIES/seash/pyreadline/lineeditor/* seattle_win/seattle_repy/pyreadline/lineeditor
-DEPENDENCIES/seash/pyreadline/modes/* seattle_win/seattle_repy/pyreadline/modes
-DEPENDENCIES/seash/pyreadline/* seattle_win/seattle_repy/pyreadline
+DEPENDENCIES/seash/pyreadline/modes/* seattle_win/seattle/seattle_repy/pyreadline/modes
+DEPENDENCIES/seash/pyreadline/* seattle_win/seattle/seattle_repy/pyreadline
 
 # Android
-./script_wrappers/linux/* seattle_android
-./linux/scripts/* seattle_android/seattle_repy
+./script_wrappers/linux/* seattle_android/seattle
+./linux/scripts/* seattle_android/seattle/seattle_repy
 
