@@ -53,12 +53,12 @@ def copyfiles(base_installer_dir):
     None
   """  
 
-  component_dirs = ['seattle_mac', 'seattle_linux', 'seattle_android', 
-      'seattle_win', 'seattle_repy']
+  component_dirs = ['seattle_mac/seattle', 'seattle_linux/seattle', 
+      'seattle_android/seattle', 'seattle_win/seattle', 'seattle_repy']
 
   for component_dir in component_dirs:
    build_component.copy_tree_to_target(component_dir, 
-       base_installer_dir + os.sep + component_dir)
+       os.path.join(base_installer_dir, component_dir))
 
 
 
@@ -177,7 +177,9 @@ def package_win(base_installer_directory,version):
   os.chdir(base_installer_directory)
   make_zipfile('seattle_'+ version +'_win.zip',base_installer_directory +os.sep+'seattle_win')
 
-def package_linux_or_mac(base_installer_directory,version):
+
+
+def package_linux_or_mac(base_installer_directory, version):
   """
   <Purpose>
     Packages the installation files for Linux or Mac into a tarball
@@ -199,7 +201,7 @@ def package_linux_or_mac(base_installer_directory,version):
     None.  
    """
 
-  installer_files = ['seattle_linux','seattle_mac']
+  installer_files = ['seattle_linux/seattle', 'seattle_mac/seattle']
 
   for files in installer_files:
     build_component.copy_tree_to_target(base_installer_directory + os.sep + 'seattle_repy',base_installer_directory + os.sep + files + os.sep + 'seattle_repy')
@@ -209,6 +211,8 @@ def package_linux_or_mac(base_installer_directory,version):
   os.chdir(base_installer_directory)
   make_tarfile('seattle_'+ version +'_mac.tgz',base_installer_directory +os.sep+'seattle_mac')
   make_tarfile('seattle_'+ version +'_linux.tgz',base_installer_directory +os.sep+'seattle_linux')
+
+
 
 def package_android(base_installer_directory,version):
   """
