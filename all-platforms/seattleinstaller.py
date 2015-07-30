@@ -1570,8 +1570,8 @@ def setup_linux_or_mac_startup():
       # value to True, but now for whatever reason, installation in the crontab
       # failed.
       configuration = persist.restore_object("nodeman.cfg")
-      config['crontab_updated_for_2009_installer'] = False
-      persist.commit_object(config,'nodeman.cfg')
+      configuration['crontab_updated_for_2009_installer'] = False
+      persist.commit_object(configuration,'nodeman.cfg')
         
       return False
 
