@@ -148,15 +148,18 @@ def rebuild_base_installers(newversion):
   print "Warning: failure after this point may leave seattlegeni with no base installers!"
 
   for files in glob.glob(base_installer_directory + '/seattle_*' ):
-    shutil.move(files, base_installer_archive_dir)
+    if os.path.isfile(files):
+      shutil.move(files, base_installer_archive_dir)
+    else:
+      print "Skipping link/directory", files
 
   print "Building new base installers at " + base_installer_directory
 
   try:
     package_installers.package_installers(base_installer_directory, version, private_key_file, public_key_file)
 
-  except:
-    print "Building base installers failed."
+  except Exception, e:
+    print "Building base installers failed. Exception:", repr(e)
     sys.exit(1)
 
   print "Changing base installer symlinks used by seattlegeni."
@@ -170,7 +173,8 @@ def rebuild_base_installers(newversion):
   uid = pwd.getpwnam(user).pw_uid
   gid = grp.getgrnam(user).gr_gid
   for files in glob.glob('./seattle_*'):
-    os.chown(files, uid, gid)
+    if os.path.isfile(files):
+      os.chown(files, uid, gid)
 
   os.symlink("seattle_" + version + "_android.zip", 'seattle_android.zip')
   os.symlink("seattle_" + version + "_linux.tgz", 'seattle_linux.tgz')

@@ -118,6 +118,8 @@ def make_tarfile(output_filename, source_dir):
   tar.add(source_dir, arcname=os.path.basename(source_dir))
   shutil.rmtree(source_dir)
 
+
+
 def make_zipfile(output_filename, source_dir):
   """
   <Purpose>
@@ -237,14 +239,31 @@ def package_android(base_installer_directory,version):
   <Returns>
     None.  
   """
+  target_path = os.path.join(base_installer_directory, 'seattle_android')
+  target_seattle_path = os.path.join(target_path, 'seattle')
+  target_repy_path = os.path.join(target_seattle_path, 'seattle_repy')
 
-  build_component.copy_tree_to_target(base_installer_directory + os.sep + 'seattle_repy',base_installer_directory + os.sep + 'seattle_android' + os.sep + 'seattle_repy')
+  build_component.copy_tree_to_target(
+      os.path.join(base_installer_directory, 'seattle_repy'), 
+      target_repy_path)
 
-  if 'pyreadline' in os.listdir(base_installer_directory + os.sep + 'seattle_android' + os.sep + 'seattle_repy'):
-    shutil.rmtree(base_installer_directory + os.sep + 'seattle_android' + os.sep + 'seattle_repy'+ os.sep + 'pyreadline')
-  
+  # Remove `pyreadline` which is only required on Windows
+  """
+  if 'pyreadline' in os.listdir(target_repy_path):
+    shutil.rmtree(os.path.join(target_repy_path, 'pyreadline'))
+  """
+
+  # XXX UGLY HACK. The Android installer must be packaged using 
+  # XXX `seattle_android` as the CWD for zipping, or else the 
+  # XXX resulting zip file will not have the correct layout.
+  # XXX After that, we chdir into the expected directory for 
+  # XXX other parts of the script. Oh, yuck!
+  os.chdir(target_path)
+  make_zipfile(os.path.join(
+      base_installer_directory, 'seattle_'+ version +'_android.zip'), 
+      target_seattle_path)
   os.chdir(base_installer_directory)
-  make_zipfile('seattle_'+ version +'_android.zip',base_installer_directory +os.sep+'seattle_android')
+
 
 def write_metainfo(base_installer_directory,privkey,pubkey):
   """
@@ -306,6 +325,7 @@ def prepare_gen_files(updatesite_dir,privkey,pubkey):
 
   build_component.copy_tree_to_target('seattle_repy',updatesite_dir)
   write_metainfo(updatesite_dir,privkey,pubkey)
+
   
 
 def package_installers(base_installer_directory,version,privkey,pubkey):
