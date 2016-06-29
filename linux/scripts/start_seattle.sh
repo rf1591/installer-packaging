@@ -10,7 +10,7 @@ then
     python softwareupdater.py &
 else
     echo "seattle must first be installed before the start_seattle.sh script" \
-	"can be run.  To install, run the install.sh script."
+    "can be run.  To install, run the install.sh script."
 fi
 
 # Wait a little so that it's unlikely that the processes launched in the
@@ -26,20 +26,28 @@ sleep 1
 #   'ps axww':
 #     'ax': shows all processes
 #     'ww': makes sure that the output is not limited by column length.
-#     
+#
 
 NMMAIN=`ps axww 2>/dev/null | grep nmmain.py | grep -v grep`
 SOFTWAREUPDATER=`ps axww 2>/dev/null | grep softwareupdater.py | grep -v grep`
-
 
 if echo "$NMMAIN" | grep nmmain.py > /dev/null
 then
     if echo "$SOFTWAREUPDATER" | grep softwareupdater.py > /dev/null
     then
-	echo "seattle has been started: $(date)"
+        echo "seattle has been started: $(date)"
+        fi
+elif cat /etc/config/system | grep OpenWrt > /dev/null
+then
+    if ps | grep nmmain.py | grep -v grep > /dev/null
+    then
+        if ps | grep softwareupdater.py | grep -v grep > /dev/null
+        then
+            echo "seattle has been started: $(date)"
+        fi
     fi
 else
     echo "seattle was not properly started."
     echo "If you continue to see this error for unknown reasons, please" \
-	"contact the seattle development team."
+    "contact the seattle development team."
 fi

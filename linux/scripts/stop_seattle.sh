@@ -25,10 +25,16 @@ if ! echo "$NMMAIN" | grep nmmain.py > /dev/null
 then
     if ! echo "$SOFTWAREUPDATER" | grep softwareupdater.py > /dev/null
     then
-	echo "seattle has been stopped: $(date)"
+        echo "seattle has been stopped: $(date)"
+    fi
+elif ! ps | grep nmmain.py | grep -v grep > /dev/null
+then
+    if ! ps | grep softwareupdater.py | grep -v grep > /dev/null
+    then
+        echo "seattle has been stopped: $(date)"
     fi
 else
     echo "seattle could not be stopped for an unknown reason."
     echo "If you continue to see this error, please contact the seattle" \
-	"development team."
+    "development team."
 fi
